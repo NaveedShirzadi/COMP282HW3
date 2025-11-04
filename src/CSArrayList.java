@@ -97,11 +97,7 @@ public class CSArrayList<E> extends AbstractList<E> {
         modCount++;
     }
 
-    /**
-     * Get a value in the array based on its index.
-     * @param index - The index of the item desired
-     * @return The contents of the array at that index
-     */
+
     @Override
     public E get(int index) {
         if (index < 0 || index >= size) {
@@ -110,12 +106,7 @@ public class CSArrayList<E> extends AbstractList<E> {
         return theData[index];
     }
 
-    /**
-     * Set the value in the array based on its index.
-     * @param index - The index of the item desired
-     * @param newValue - The new value to store at this position
-     * @return The old value at this position
-     */
+
     @Override
     public E set(int index, E newValue) {
         if (index < 0 || index >= size) {
@@ -126,11 +117,7 @@ public class CSArrayList<E> extends AbstractList<E> {
         return oldValue;
     }
 
-    /**
-     * Remove an entry based on its index
-     * @param index - The index of the entry to be removed
-     * @return The value removed
-     */
+
     @Override
     public E remove(int index) {
         if (index < 0 || index >= size) {
@@ -146,31 +133,19 @@ public class CSArrayList<E> extends AbstractList<E> {
         return returnValue;
     }
 
-    /**
-     * Allocate a new array that is twice the size of the current array.
-     * Copies the contents of the current array to the new one using Arrays.copyOf
-     */
+
     private void reallocate() {
         capacity = (capacity == 0) ? INITIAL_CAPACITY : 2 * capacity;
         theData = Arrays.copyOf(theData, capacity);
     }
 
-    /**
-     * Get the current size of the array
-     * @return The current size of the array
-     */
+
     @Override
     public int size() {
         return size;
     }
 
-    /**
-     * Returns the index of the first occurrence of the specified element
-     * in this list, or -1 if this list does not contain the element
-     * @param item The object to search for
-     * @return The index of the first occurrence of the specified item
-     *         or -1 if this list does not contain the element
-     */
+
     @Override
     public int indexOf(Object item) {
         for (int i = 0; i < size; i++) {
@@ -179,11 +154,8 @@ public class CSArrayList<E> extends AbstractList<E> {
         return -1;
     }
 
-    /**
-     * Returns a string representation of the list in [A, B, C] format.
-     * This helps visualize the contents of the list for debugging or printing.
-     */
-    @Override
+
+    @Override // formats the last and if the list is empty it returns []
     public String toString() {
         if (size == 0) return "[]";
         StringBuilder sb = new StringBuilder("[");
@@ -195,11 +167,8 @@ public class CSArrayList<E> extends AbstractList<E> {
         return sb.toString();
     }
 
-    /**
-     * Removes all elements from the list and resets its size to 0.
-     * The capacity remains unchanged (like Java's ArrayList behavior).
-     */
-    @Override
+
+    @Override // goes through the loop changing elements to zero while also increment modcount to show structure has changed
     public void clear() {
         for (int i = 0; i < size; i++) {
             theData[i] = null;
@@ -208,20 +177,13 @@ public class CSArrayList<E> extends AbstractList<E> {
         modCount++;
     }
 
-    /**
-     * Checks if the list currently has no elements.
-     * @return true if the list is empty, false otherwise
-     */
-    @Override
+
+    @Override // checks to see if the array is empty or not
     public boolean isEmpty() {
         return size == 0;
     }
 
-    /**
-     * Removes the first occurrence of a given object from the list.
-     * @param o the object to be removed
-     * @return true if the object was found and removed, false otherwise
-     */
+
     @Override
     public boolean remove(Object o) {
         int idx = indexOf(o);
