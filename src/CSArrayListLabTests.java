@@ -186,13 +186,11 @@ public class CSArrayListLabTests {
         CSArrayList<Integer> list = new CSArrayList<>();
         for (int i = 0; i < 5; i++) list.add(i);
 
-        Iterator<Integer> it = list.iterator();
-        // structural modification after obtaining iterator
-        list.add(99);
+        Iterator<Integer> it = list.iterator(); // captures expectedModCount
+        list.add(99);                           // structural modification -> modCount++
 
-        // Any iterator method that checks modCount should throw
-        assertThrows(ConcurrentModificationException.class, it::hasNext);
-        // next() would also be fine to trigger the same exception
+        // The check happens on next(), not hasNext()
+        assertThrows(ConcurrentModificationException.class, it::next);
     }
 
 
